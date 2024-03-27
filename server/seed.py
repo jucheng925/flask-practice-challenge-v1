@@ -20,7 +20,7 @@ with app.app_context():
   db.session.add_all([post_1_comment_1, post_1_comment_2, post_1_comment_3])
   db.session.commit()
 
-  post_2_comment_1 = Comment(commenter="Sam", post_id=post_2.id, content="I step on legos all the time!")
+  post_2_comment_1 = Comment(commenter="Sara", post_id=post_2.id, content="I step on legos all the time!")
   post_2_comment_2 = Comment(commenter="Frank", post_id=post_2.id, content="My son leaves legos all over the floor. I step on them on purpose because if I'm going down, it's going to be on my terms!")
 
   db.session.add_all([post_2_comment_1, post_2_comment_2])
