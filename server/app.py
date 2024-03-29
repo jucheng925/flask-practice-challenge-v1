@@ -83,6 +83,28 @@ class MostPopularCommenter(Resource):
 
 api.add_resource(MostPopularCommenter, '/api/most_popular_commenter')
 
+class PostByCommenter(Resource):
+    def get(self, commenter):
+
+        # LONG WAY - both still works
+        # posts = Post.query.all()
+        # posts_by_commenter = []
+        # for post in posts:
+        #     comments = Comment.query.filter(Comment.post_id == post.id, Comment.commenter == commenter).all()
+        #     if comments:
+        #         posts_by_commenter.append(post)
+
+        # resp = [post.to_dict() for post in posts_by_commenter]
+        # return resp, 200
+        
+
+        # Using db.session.query and join method - shorter way
+        query = db.session.query(Post).join(Comment).filter(Comment.commenter == commenter).all()
+        resp = [post.to_dict() for post in query]
+        return resp, 200
+
+api.add_resource(PostByCommenter, '/api/post_by_commenter/<commenter>')
+
 
 if __name__ == "__main__":
   app.run(port=5555, debug=True)
